@@ -1,15 +1,10 @@
 import { LitElement, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
+@customElement("primary-view")
 class PrimaryView extends LitElement {
-  cards: Array<any>;
-  static properties = {
-    cards: { type: Array },
-  };
-
-  constructor() {
-    super();
-    this.cards = [];
-  }
+  @property({ type: Array })
+  cards = [];
 
   setConfig(_config) {}
 
@@ -20,4 +15,3 @@ class PrimaryView extends LitElement {
     return html`${this.cards.map((card) => html`<div>${card}</div>`)}`;
   }
 }
-customElements.define("primary-view", PrimaryView);

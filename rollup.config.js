@@ -1,5 +1,6 @@
 import { babel } from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
 import { globSync } from "glob";
 
 export default {
@@ -7,9 +8,13 @@ export default {
   output: {
     format: "es",
     dir: "dist",
-    paths: {
-      lit: "https://unpkg.com/lit-element@2.0.1/lit-element.js?module",
-    },
   },
-  plugins: [resolve(), babel({ babelHelpers: "bundled" })],
+  plugins: [
+    typescript(),
+    resolve(),
+    babel({
+      babelHelpers: "bundled",
+      extensions: [".ts"],
+    }),
+  ],
 };

@@ -1,5 +1,7 @@
 import { LitElement, html } from "lit";
+import { customElement } from "lit/decorators.js";
 
+@customElement("weather-card")
 class WeatherCard extends LitElement {
   setConfig(_config) {}
 
@@ -11,5 +13,3 @@ class WeatherCard extends LitElement {
     `;
   }
 }
-
-customElements.define("weather-card", WeatherCard);

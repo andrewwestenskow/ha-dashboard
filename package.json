@@ -12,21 +12,24 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@babel/plugin-proposal-decorators": "^7.24.7",
     "@babel/preset-env": "^7.25.4",
     "@eslint/js": "^9.9.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.7",
+    "@rollup/plugin-typescript": "^11.1.6",
     "eslint": "^9.9.1",
     "glob": "^11.0.0",
     "globals": "^15.9.0",
     "rollup": "^4.21.0",
     "ts-lit-plugin": "^2.0.2",
+    "tslib": "^2.7.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.2.0"
   },
   "dependencies": {
-    "lit": "2.0.1"
+    "lit": "^3.2.0"
   },
   "type": "module"
 }
