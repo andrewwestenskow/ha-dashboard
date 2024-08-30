@@ -58,11 +58,13 @@ class PrimaryView extends LitElement {
       }
 
       #sidebar {
+        box-sizing: border-box;
         background-color: var(--secondary-background-color);
         padding: 10px;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
         gap: 15px;
+        height: calc(100vh - var(--header-height));
       }
 
       #cards {

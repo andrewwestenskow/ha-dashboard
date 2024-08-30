@@ -1,4 +1,34 @@
 import { HomeAssistant } from "../types";
+import { CalendarEvent } from "../types/calendar";
+
+type CalendarResponse = {
+  [key: string]: {
+    events: Array<{
+      start: string;
+      end: string;
+      summary: string;
+    }>;
+  };
+};
+
+const groupEvents = (calendars: CalendarResponse) => {
+  const events: CalendarEvent[] = [];
+
+  Object.entries(calendars).forEach(([calendar, data]) => {
+    data.events.forEach((event) => {
+      events.push({
+        calendar,
+        start: event.start,
+        end: event.end,
+        summary: event.summary || "Busy",
+      });
+    });
+  });
+
+  events.sort((a, b) => a.start.localeCompare(b.start));
+
+  return events;
+};
 
 export const fetchEvents = async (hass: HomeAssistant, entities: string[]) => {
   const now = new Date();
@@ -8,7 +38,7 @@ export const fetchEvents = async (hass: HomeAssistant, entities: string[]) => {
     32
   ).toISOString();
 
-  const allEvents = await hass?.callService(
+  const { response: allEvents } = await hass?.callService(
     "calendar",
     "get_events",
     {
@@ -19,7 +49,5 @@ export const fetchEvents = async (hass: HomeAssistant, entities: string[]) => {
     true
   );
 
-  console.log(allEvents);
-
-  return [];
+  return groupEvents(allEvents);
 };
