@@ -1,5 +1,5 @@
-import { _ as __decorate, a as _inherits, b as _createClass, t, j as i, c as _taggedTemplateLiteral, k as ke, h, d as _classCallCheck, e as _callSuper } from './custom-element-B4KNkwcf.js';
-import { n } from './property-BNEfCaap.js';
+import { _ as __decorate, a as _inherits, b as _createClass, t, i, c as baselineCss, d as _taggedTemplateLiteral, k as ke, h, e as _classCallCheck, f as _callSuper } from './css-BL2CzZUT.js';
+import { n } from './property-BcNWKSo7.js';
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 var PrimaryView = /*#__PURE__*/function (_LitElement) {
@@ -46,7 +46,7 @@ var PrimaryView = /*#__PURE__*/function (_LitElement) {
   }], [{
     key: "styles",
     get: function get() {
-      return i(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      #container {\n        height: 100%;\n        display: grid;\n        grid-template-columns: 350px 1fr;\n      }\n\n      #sidebar {\n        box-sizing: border-box;\n        background-color: var(--secondary-background-color);\n        padding: 10px;\n        display: grid;\n        grid-template-rows: auto auto minmax(0, 1fr);\n        gap: 15px;\n        height: calc(100vh - var(--header-height));\n      }\n\n      #cards {\n        padding: 10px;\n        gap: 15px;\n        display: grid;\n        grid-template-columns: repeat(auto-fill, 250px);\n        grid-template-rows: repeat(auto-fill, 250px);\n        overflow-y: auto;\n    "])));
+      return i(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      ", "\n      #container {\n        height: 100%;\n        display: grid;\n        grid-template-columns: 350px 1fr;\n\n      }\n\n      #container hui-card {\n        border-radius: 12px;\n      }\n\n      #container ha-card {\n        border: 1px solid white;\n        border-radius: 12px;\n      }\n\n      #sidebar {\n        box-sizing: border-box;\n        background-color: var(--secondary-background-color);\n        padding: 10px;\n        display: grid;\n        grid-template-rows: auto auto minmax(0, 1fr);\n        gap: 15px;\n        height: calc(100vh - var(--header-height));\n      }\n\n      #cards {\n        padding: 10px;\n        gap: 15px;\n        display: grid;\n        grid-template-columns: repeat(auto-fill, 500px);\n        grid-auto-rows: min-content;\n        overflow-y: auto;\n        height: calc(100vh - var(--header-height));\n    "])), baselineCss);
     }
   }]);
 }(h);

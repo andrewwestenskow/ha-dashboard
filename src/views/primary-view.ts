@@ -1,11 +1,14 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { HassCard } from "../types";
+import { baselineCss } from "../constants/css";
+import { HassCard, LovelaceViewElement } from "../types";
 
 @customElement("primary-view")
-class PrimaryView extends LitElement {
+class PrimaryView extends LitElement implements LovelaceViewElement {
   @property({ type: Array<HassCard> })
   cards = [];
+
+  @property({ attribute: false }) isStrategy = false;
 
   setConfig(_config) {}
 
@@ -51,10 +54,21 @@ class PrimaryView extends LitElement {
 
   static get styles() {
     return css`
+      ${baselineCss}
       #container {
         height: 100%;
         display: grid;
         grid-template-columns: 350px 1fr;
+
+      }
+
+      #container hui-card {
+        border-radius: 12px;
+      }
+
+      #container ha-card {
+        border: 1px solid white;
+        border-radius: 12px;
       }
 
       #sidebar {
@@ -71,9 +85,10 @@ class PrimaryView extends LitElement {
         padding: 10px;
         gap: 15px;
         display: grid;
-        grid-template-columns: repeat(auto-fill, 250px);
-        grid-template-rows: repeat(auto-fill, 250px);
+        grid-template-columns: repeat(auto-fill, 500px);
+        grid-auto-rows: min-content;
         overflow-y: auto;
+        height: calc(100vh - var(--header-height));
     `;
   }
 }

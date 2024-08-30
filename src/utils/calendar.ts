@@ -1,5 +1,6 @@
+import { differenceInDays } from "date-fns";
 import { HomeAssistant } from "../types";
-import { CalendarEvent } from "../types/calendar";
+import { CalendarEvent, Day } from "../types/calendar";
 
 type CalendarResponse = {
   [key: string]: {
@@ -16,18 +17,38 @@ const groupEvents = (calendars: CalendarResponse) => {
 
   Object.entries(calendars).forEach(([calendar, data]) => {
     data.events.forEach((event) => {
+      const duration = differenceInDays(event.end, event.start);
       events.push({
         calendar,
         start: event.start,
         end: event.end,
+        isAllDay: duration > 0,
+        duration,
         summary: event.summary || "Busy",
       });
     });
   });
 
-  events.sort((a, b) => a.start.localeCompare(b.start));
+  const dividedEvents = events.reduce((acc, event) => {
+    const start = new Date(event.start);
+    const end = new Date(event.end);
+    const day = start.toDateString();
+    if (acc[day]) {
+      acc[day].events.push(event);
+    } else {
+      acc[day] = {
+        date: day,
+        events: [event],
+      };
+    }
+    return acc;
+  }, {} as Record<string, Day>);
 
-  return events;
+  const allDays = Object.values(dividedEvents);
+  allDays.sort((a, b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
+  return allDays;
 };
 
 export const fetchEvents = async (hass: HomeAssistant, entities: string[]) => {

@@ -262,3 +262,187 @@ export type HassView = {
   cards: HassCard[];
   badges: HassBadge[];
 };
+
+export type LovelaceLayoutOptions = {
+  grid_columns?: number | "full";
+  grid_rows?: number | "auto";
+  grid_max_columns?: number;
+  grid_min_columns?: number;
+  grid_min_rows?: number;
+  grid_max_rows?: number;
+};
+
+interface BaseCondition {
+  condition: string;
+}
+
+export interface NumericStateCondition extends BaseCondition {
+  condition: "numeric_state";
+  entity?: string;
+  below?: string | number;
+  above?: string | number;
+}
+
+export interface StateCondition extends BaseCondition {
+  condition: "state";
+  entity?: string;
+  state?: string | string[];
+  state_not?: string | string[];
+}
+
+export interface ScreenCondition extends BaseCondition {
+  condition: "screen";
+  media_query?: string;
+}
+
+export interface UserCondition extends BaseCondition {
+  condition: "user";
+  users?: string[];
+}
+
+export interface OrCondition extends BaseCondition {
+  condition: "or";
+  conditions?: Condition[];
+}
+
+export interface AndCondition extends BaseCondition {
+  condition: "and";
+  conditions?: Condition[];
+}
+
+export type Condition =
+  | NumericStateCondition
+  | StateCondition
+  | ScreenCondition
+  | UserCondition
+  | OrCondition
+  | AndCondition;
+
+export interface LovelaceCardConfig {
+  index?: number;
+  view_index?: number;
+  view_layout?: any;
+  layout_options?: LovelaceLayoutOptions;
+  type: string;
+  [key: string]: any;
+  visibility?: Condition[];
+}
+
+export interface LovelaceCard extends HTMLElement {
+  hass?: HomeAssistant;
+  preview?: boolean;
+  layout?: string;
+  getCardSize(): number | Promise<number>;
+  getLayoutOptions?(): LovelaceLayoutOptions;
+  setConfig(config: LovelaceCardConfig): void;
+}
+
+export interface ShowViewConfig {
+  user?: string;
+}
+
+interface LovelaceViewBackgroundConfig {
+  image?: string;
+}
+
+export interface LovelaceBaseViewConfig {
+  index?: number;
+  title?: string;
+  path?: string;
+  icon?: string;
+  theme?: string;
+  panel?: boolean;
+  background?: string | LovelaceViewBackgroundConfig;
+  visible?: boolean | ShowViewConfig[];
+  subview?: boolean;
+  back_path?: string;
+  // Only used for section view, it should move to a section view config type when the views will have dedicated editor.
+  max_columns?: number;
+  dense_section_placement?: boolean;
+}
+
+export interface LovelaceBadgeConfig {
+  type: string;
+  [key: string]: any;
+  visibility?: Condition[];
+}
+
+export interface LovelaceBaseSectionConfig {
+  title?: string;
+  visibility?: Condition[];
+  column_span?: number;
+}
+
+export interface LovelaceSectionConfig extends LovelaceBaseSectionConfig {
+  type?: string;
+  cards?: LovelaceCardConfig[];
+}
+
+export interface LovelaceStrategyConfig {
+  type: string;
+  [key: string]: any;
+}
+
+export interface LovelaceStrategySectionConfig
+  extends LovelaceBaseSectionConfig {
+  strategy: LovelaceStrategyConfig;
+}
+
+export type LovelaceSectionRawConfig =
+  | LovelaceSectionConfig
+  | LovelaceStrategySectionConfig;
+
+export interface LovelaceViewConfig extends LovelaceBaseViewConfig {
+  type?: string;
+  badges?: (string | Partial<LovelaceBadgeConfig>)[]; // Badge can be just an entity_id or without type
+  cards?: LovelaceCardConfig[];
+  sections?: LovelaceSectionRawConfig[];
+}
+
+export interface LovelaceDashboardBaseConfig {}
+
+export interface LovelaceStrategyViewConfig extends LovelaceBaseViewConfig {
+  strategy: LovelaceStrategyConfig;
+}
+
+export type LovelaceViewRawConfig =
+  | LovelaceViewConfig
+  | LovelaceStrategyViewConfig;
+
+export interface LovelaceConfig extends LovelaceDashboardBaseConfig {
+  background?: string;
+  views: LovelaceViewRawConfig[];
+}
+
+export interface LovelaceDashboardStrategyConfig
+  extends LovelaceDashboardBaseConfig {
+  strategy: LovelaceStrategyConfig;
+}
+
+export type LovelaceRawConfig =
+  | LovelaceConfig
+  | LovelaceDashboardStrategyConfig;
+
+export interface Lovelace {
+  config: LovelaceConfig;
+  rawConfig: LovelaceRawConfig;
+  editMode: boolean;
+  urlPath: string | null;
+  mode: "generated" | "yaml" | "storage";
+  enableFullEditMode: () => void;
+  setEditMode: (editMode: boolean) => void;
+  saveConfig: (newConfig: LovelaceRawConfig) => Promise<void>;
+  deleteConfig: () => Promise<void>;
+}
+
+export interface LovelaceViewElement extends HTMLElement {
+  hass?: HomeAssistant;
+  lovelace?: Lovelace;
+  narrow?: boolean;
+  index?: number;
+  cards?: HassCard[];
+  badges?: HassBadge[];
+  //sections?: HuiSection[];
+  isStrategy: boolean;
+  setConfig(config: LovelaceViewConfig): void;
+}

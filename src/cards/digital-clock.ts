@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { baselineCss } from "../constants/css";
 
 @customElement("digital-clock")
 class DigitalClock extends LitElement {
@@ -33,6 +34,7 @@ class DigitalClock extends LitElement {
 
   static get styles() {
     return css`
+      ${baselineCss}
       #clock {
         display: flex;
         justify-content: center;

@@ -1,6 +1,6 @@
-import { _ as __decorate, t, a as _inherits, b as _createClass, k as ke, c as _taggedTemplateLiteral, h, d as _classCallCheck, e as _callSuper } from './custom-element-B4KNkwcf.js';
+import { _ as __decorate, t, a as _inherits, b as _createClass, i, c as baselineCss, d as _taggedTemplateLiteral, k as ke, h, e as _classCallCheck, f as _callSuper } from './css-BL2CzZUT.js';
 
-var _templateObject;
+var _templateObject, _templateObject2;
 var WeatherCard = /*#__PURE__*/function (_LitElement) {
   function WeatherCard() {
     _classCallCheck(this, WeatherCard);
@@ -14,6 +14,11 @@ var WeatherCard = /*#__PURE__*/function (_LitElement) {
     key: "render",
     value: function render() {
       return ke(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <ha-card header=\"Weather Card\">\n        <div>HELLO WORLD</div>\n      </ha-card>\n    "])));
+    }
+  }], [{
+    key: "styles",
+    get: function get() {
+      return i(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      ", "\n    "])), baselineCss);
     }
   }]);
 }(h);
