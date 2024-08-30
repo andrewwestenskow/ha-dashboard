@@ -1,12 +1,7 @@
-import { u, f, _ as __decorate, a as _inherits, b as _createClass, t, k as ke, c as _taggedTemplateLiteral, h, d as _classCallCheck, e as _callSuper } from './custom-element-D6qhRDeR.js';
+import { _ as __decorate, a as _inherits, b as _createClass, t, j as i, c as _taggedTemplateLiteral, k as ke, h, d as _classCallCheck, e as _callSuper } from './custom-element-B5Lt9aLL.js';
+import { n } from './property-CT-HztNn.js';
 
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */const o={attribute:!0,type:String,converter:u,reflect:!1,hasChanged:f},r=(t=o,e,r)=>{const{kind:n,metadata:i}=r;let s=globalThis.litPropertyMetadata.get(i);if(void 0===s&&globalThis.litPropertyMetadata.set(i,s=new Map),s.set(r.name,t),"accessor"===n){const{name:o}=r;return {set(r){const n=e.get.call(this);e.set.call(this,r),this.requestUpdate(o,n,t);},init(e){return void 0!==e&&this.P(o,void 0,t),e}}}if("setter"===n){const{name:o}=r;return function(r){const n=this[o];e.call(this,r),this.requestUpdate(o,n,t);}}throw Error("Unsupported decorator location: "+n)};function n(t){return (e,o)=>"object"==typeof o?r(t,e,o):((t,e,o)=>{const r=e.hasOwnProperty(o);return e.constructor.createProperty(o,r?{...t,wrapped:!0}:t),r?Object.getOwnPropertyDescriptor(e,o):void 0})(t,e,o)}
-
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 var PrimaryView = /*#__PURE__*/function (_LitElement) {
   function PrimaryView() {
     var _this;
@@ -25,9 +20,33 @@ var PrimaryView = /*#__PURE__*/function (_LitElement) {
       if (!this.cards) {
         return ke(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
       }
-      return ke(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["", ""])), this.cards.map(function (card) {
+      var _this$cards$reduce = this.cards.reduce(function (acc, card) {
+          var _a, _b;
+          var isSidebar = (_b = (_a = card._elementConfig) === null || _a === void 0 ? void 0 : _a.variables) === null || _b === void 0 ? void 0 : _b.find(function (v) {
+            return "sidebar" in v && v.sidebar === 1;
+          });
+          if (isSidebar) {
+            acc.sidebar.push(card);
+          } else {
+            acc.cards.push(card);
+          }
+          return acc;
+        }, {
+          sidebar: [],
+          cards: []
+        }),
+        sidebar = _this$cards$reduce.sidebar,
+        cards = _this$cards$reduce.cards;
+      return ke(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      <div id=\"container\">\n        <section id=\"sidebar\">\n          ", "\n        </section>\n        <section id=\"cards\">\n          ", "\n        </section>\n      </div>\n    "])), sidebar.map(function (card) {
         return ke(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["<div>", "</div>"])), card);
+      }), cards.map(function (card) {
+        return ke(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["<div>", "</div>"])), card);
       }));
+    }
+  }], [{
+    key: "styles",
+    get: function get() {
+      return i(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      #container {\n        height: 100%;\n        display: grid;\n        grid-template-columns: 350px 1fr;\n      }\n\n      #sidebar {\n        background-color: var(--secondary-background-color);\n        padding: 10px;\n        display: flex;\n        flex-direction: column;\n        gap: 15px;\n      }\n\n      #cards {\n        padding: 10px;\n        gap: 15px;\n        display: grid;\n        grid-template-columns: repeat(auto-fill, 250px);\n        grid-template-rows: repeat(auto-fill, 250px);\n        overflow-y: auto;\n    "])));
     }
   }]);
 }(h);
@@ -35,3 +54,4 @@ __decorate([n({
   type: Array
 })], PrimaryView.prototype, "cards", void 0);
 PrimaryView = __decorate([t("primary-view")], PrimaryView);
+//# sourceMappingURL=primary-view.js.map
