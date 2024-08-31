@@ -1,5 +1,5 @@
-import { _ as __decorate, a as _inherits, b as _createClass, t, i, c as baselineCss, d as _taggedTemplateLiteral, k as ke, h, e as _classCallCheck, f as _callSuper } from './css-BL2CzZUT.js';
-import { n } from './property-BcNWKSo7.js';
+import { _ as __decorate, a as _inherits, b as _createClass, t, i, c as baselineCss, d as _taggedTemplateLiteral, k as ke, h, e as _classCallCheck, f as _callSuper } from './css-5e1PV-Iq.js';
+import { n } from './property-BK0L8lc3.js';
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 var PrimaryView = /*#__PURE__*/function (_LitElement) {
@@ -8,6 +8,7 @@ var PrimaryView = /*#__PURE__*/function (_LitElement) {
     _classCallCheck(this, PrimaryView);
     _this = _callSuper(this, PrimaryView, arguments);
     _this.cards = [];
+    _this.isStrategy = false;
     return _this;
   }
   _inherits(PrimaryView, _LitElement);
@@ -53,5 +54,8 @@ var PrimaryView = /*#__PURE__*/function (_LitElement) {
 __decorate([n({
   type: Array
 })], PrimaryView.prototype, "cards", void 0);
+__decorate([n({
+  attribute: false
+})], PrimaryView.prototype, "isStrategy", void 0);
 PrimaryView = __decorate([t("primary-view")], PrimaryView);
 //# sourceMappingURL=primary-view.js.map
