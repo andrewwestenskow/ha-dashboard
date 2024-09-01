@@ -1,0 +1,1 @@
+smbclient //192.168.1.65/config -A .creds -c "prompt; recurse; cd www/dashboard; lcd dist; mput *;"
