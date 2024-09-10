@@ -1,12 +1,22 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { baselineCss } from "../constants/css";
-import { HassCard, LovelaceViewElement } from "../types";
+import type {
+  HassBadge,
+  HassCard,
+  HomeAssistant,
+  Lovelace,
+  LovelaceViewElement,
+} from "../types";
 
 @customElement("primary-view")
 class PrimaryView extends LitElement implements LovelaceViewElement {
-  @property({ type: Array<HassCard> })
-  cards = [];
+  hass?: HomeAssistant | undefined;
+  lovelace?: Lovelace | undefined;
+  narrow?: boolean | undefined;
+  index?: number | undefined;
+  cards?: HassCard[] | undefined;
+  badges?: HassBadge[] | undefined;
 
   @property({ attribute: false }) isStrategy = false;
 
@@ -59,7 +69,6 @@ class PrimaryView extends LitElement implements LovelaceViewElement {
         height: 100%;
         display: grid;
         grid-template-columns: 350px 1fr;
-
       }
 
       #container hui-card {
@@ -89,6 +98,7 @@ class PrimaryView extends LitElement implements LovelaceViewElement {
         grid-auto-rows: min-content;
         overflow-y: auto;
         height: calc(100vh - var(--header-height));
+      }
     `;
   }
 }
